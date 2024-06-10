@@ -1,0 +1,10 @@
+# Ignorar todas as ocorrências de node_modules/
+**/node_modules/
+**/.pnpm.store/
+
+# Ignorar pasta .pnpm usada pelo pnpm
+.pnpm/
+
+# Ignorar pasta .store usada pelo pnpm
+.store/
+.pnpm-store/
