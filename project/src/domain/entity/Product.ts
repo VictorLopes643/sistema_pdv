@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 export default class Product {
 
     private constructor (readonly product_id: string, readonly name: string, readonly description: string, readonly price: number){
-
     }
 
   static create(name: string, description: string, price: number) {

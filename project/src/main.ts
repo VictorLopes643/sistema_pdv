@@ -1,17 +1,10 @@
-import express from "express";
-import { ProductDAODatabase } from "./infra/repository/ProductDAO";
-const app = express();
-app.use(express.json());
+import NewStore from "./application/usecase/NewStore";
+import { ExpressAdapter } from "./infra/http/HttpServer";
+import StoreController from "./infra/http/StoreController";
+import { StoreDAODatabase } from "./infra/repository/StoreDAO";
 
-app.get("/", async function (req, res) {
-	try {
-		const productDAO = new ProductDAODatabase();
-		const output = await productDAO.listProduct()
-		res.json(output);
-	} catch (error: any) {
-		res.status(422).json({
-			message: error.message
-		});
-	}
-});
-app.listen(3000);
+const httpServer = new ExpressAdapter();
+const newStore = new NewStore(new StoreDAODatabase());
+new StoreController(httpServer, newStore); 
+
+httpServer.listen(3000);

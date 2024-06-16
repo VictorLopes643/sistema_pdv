@@ -2,7 +2,6 @@ import { v4 as uuidv4 } from 'uuid';
 import Name from '../vo/Name';
 import Description from '../vo/Description';
 
-
 export default class Store {
     private constructor(readonly store_id: string,private name: Name, private description: Description) {
     }

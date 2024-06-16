@@ -1,5 +1,4 @@
-import { ProductDAODatabase, ProductDAOInMemory } from "../src/infra/repository/ProductDAO";
-import CheckoutCart from "../src/application/usecase/checkoutCart";
+import { ProductDAODatabase } from "../src/infra/repository/ProductDAO";
 import NewProduct from "../src/application/usecase/newProduct";
 import { faker } from '@faker-js/faker';
 
