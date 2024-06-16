@@ -13,7 +13,6 @@ export default class NewStore {
         const store = await this.storeDAO.getStoreByName(inputStore.name)
         if (store) throw new Error("Store already exists")
         const storeCreated = Store.create(inputStore.name, inputStore.description)
-    console.log(storeCreated)
         await this.storeDAO.newStore(storeCreated)
     }
 }
