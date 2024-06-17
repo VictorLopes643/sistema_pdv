@@ -3,9 +3,10 @@ import NewProduct from "../src/application/usecase/newProduct";
 import { faker } from '@faker-js/faker';
 
 
-test("Deve criar um produto", async function () {
+test.only("Deve criar um produto", async function () {
     const inputProduct = {
-        name:  faker.commerce.product(),
+        // name:  faker.commerce.product(),
+        name:  "Coca Cola",
         description: faker.commerce.productDescription(),
         price: Number( faker.commerce.price({ min: 1, max: 1000, dec: 2 }))
     }

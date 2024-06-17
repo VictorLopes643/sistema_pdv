@@ -15,6 +15,10 @@ export default class Store {
         return new Store(storeId, new Name(name), new Description(description))
     }
 
+    getStoreId() {
+        return this.store_id
+    }
+
     getName() {
         return this.name.getValue()
     }

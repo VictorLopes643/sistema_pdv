@@ -4,7 +4,6 @@ import NewStore from "../src/application/usecase/NewStore";
 
 
 test("Deve criar uma loja", async function () {   
-
     const storeDAO = await new StoreDAODatabase()
     const inputStore = {
         name:  faker.company.name(),
@@ -17,7 +16,6 @@ test("Deve criar uma loja", async function () {
 })
 
 test.skip("Não deve criar uma loja com Descripton menor que 10 caracters", async function () {   
-
     const storeDAO = await new StoreDAODatabase()
     const inputStore = {
         name:  faker.company.name(),
