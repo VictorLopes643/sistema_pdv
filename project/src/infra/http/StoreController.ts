@@ -5,7 +5,7 @@ import HttpServer from "./HttpServer";
 export default class StoreController {
 
 	constructor (readonly httpServer: HttpServer, readonly store: NewStore) {
-		httpServer.register("post", "/store", async function (params: any, body: any) {
+		httpServer.register("post", "/store",  async function (params: any, body: any) {
 			const output = await store.execute(body);
 			return output;
 		});
