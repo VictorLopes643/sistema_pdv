@@ -1,48 +1,39 @@
-// import NewStore from "./application/usecase/NewStore";
-// import { ExpressAdapter } from "./infra/http/HttpServer";
-// import StoreController from "./infra/http/StoreController";
-// import { StoreDAODatabase } from "./infra/repository/StoreDAO";
-// import Keycloak from 'keycloak-connect';
 import session from 'express-session'
-// import express from 'express'
-// import keycloakMeu from "./infra/http/Key";
-// const httpServer = new ExpressAdapter();
-// const newStore = new NewStore(new StoreDAODatabase());
-// new StoreController(httpServer, newStore); 
-
-// httpServer.listen(3000);
-
 import express from 'express';
-import keycloakMeu, { MemoryStore } from './infra/http/Key';
+import KeycloakConnect from 'keycloak-connect';
 
 const app = express();
 const port = 3000;
-  app.use(session({
-    secret: 'mySecret ',
-    resave: false,
-    saveUninitialized: true,
-    store: MemoryStore
-  }));
-app.use(keycloakMeu.middleware({
-  admin: '/',
-  logout: '/logout',
-}));
+var memoryStore = new session.MemoryStore();
+
+var keycloak = new KeycloakConnect({ store: memoryStore});
 app.use(
   session({
-    secret: 'mySecret',
+    secret: '123456',
     resave: false,
     saveUninitialized: true,
-    store: MemoryStore,
+    store: memoryStore,
     cookie: {
         maxAge: 60000
     }
   })
 )
+
+
+app.use(keycloak.middleware({
+  logout: '/logout',
+  admin: '/'
+}));
 app.get('/public', (req, res) => {
   res.json({message: 'public'});
 });
-
-app.get('/', keycloakMeu.protect(), (req, res) => {
+app.get('/', keycloak.protect(), (req, res) => {
+  res.json({message: 'admin'});
+});
+app.get('/private', keycloak.protect(), (req, res) => {
+  res.json({message: 'admin'});
+});
+app.get('/?auth_callback', (req, res) => {
   res.json({message: 'admin'});
 });
 

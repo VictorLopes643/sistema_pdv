@@ -1,14 +1,37 @@
-version: '3.8'
-
+version: '3.9'
 services:
-  keycloak:
-    image: quay.io/keycloak/keycloak:25.0.1
-    ports:
-      - "8080:8080"
+  postgresDB:
+    image: postgres:latest
     environment:
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=admin
-    command: ["start-dev"]
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+    volumes:
+      - ./project/create.sql:/docker-entrypoint-initdb.d/create.sql
+      - ./postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    networks:
+      - keycloak_network
+    command: ["postgres", "-c", "log_statement=all"]
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:legacy
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgresDB:5432  # Corrigido para apontar para o serviço postgresDB na porta 5432
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: keycloak
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgresDB
+    networks:
+      - keycloak_network
+
   app:
     build: 
       context: ./project
@@ -17,15 +40,10 @@ services:
     volumes:
       - ./project:/home/node/app
     depends_on:
-      - db
-  db:
-    image: postgres:latest
-    environment:
-      POSTGRES_PASSWORD: 123456
-      POSTGRES_DB: app
-    ports:
-      - 5432:5432
-    volumes:
-      - ./.docker/pgdata:/var/lib/postgresql/data
-      - ./create.sql:/docker-entrypoint-initdb.d
-    command: ['postgres', '-c', 'log_statement=all', '-c', 'log_destination=stderr']
+      - postgresDB
+    networks:
+      - keycloak_network
+
+networks:
+  keycloak_network:
+    driver: bridge
