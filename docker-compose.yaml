@@ -11,27 +11,23 @@ services:
       - ./postgres_data:/var/lib/postgresql/data/
     ports:
       - 5432:5432
-    networks:
-      - keycloak_network
     command: ["postgres", "-c", "log_statement=all"]
-
-  keycloak:
+  keycloakImage:
     image: quay.io/keycloak/keycloak:legacy
     environment:
       DB_VENDOR: POSTGRES
-      DB_ADDR: postgresDB:5432  # Corrigido para apontar para o serviço postgresDB na porta 5432
+      DB_ADDR: postgresDB:5432  
       DB_DATABASE: keycloak
       DB_USER: keycloak
       DB_PASSWORD: keycloak
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - 8080:8080
     depends_on:
       - postgresDB
-    networks:
-      - keycloak_network
-
   app:
     build: 
       context: ./project
@@ -39,11 +35,9 @@ services:
       - 3005:3000
     volumes:
       - ./project:/home/node/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - postgresDB
-    networks:
-      - keycloak_network
 
-networks:
-  keycloak_network:
-    driver: bridge
+
