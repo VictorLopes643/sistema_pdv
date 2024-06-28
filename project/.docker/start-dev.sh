@@ -6,7 +6,6 @@ if [ ! -f "./.env" ]; then
 fi
 
 # Instalar dependências
-chmod -R 777 .docker/*
 pnpm install
 
 tail -f /dev/null
