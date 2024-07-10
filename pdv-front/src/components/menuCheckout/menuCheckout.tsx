@@ -4,7 +4,7 @@ import { IoClose } from "react-icons/io5";
 import ItemsCard from "./ItemsCard";
 import MenuCheckoutProvider from "../MenuCheckutContext";
 import { useMenuCheckoutStore } from "../Store/Store";
-import { useProductStore } from "../Store/ProductStore";
+import { useCartStore } from "../Store/CartStore";
 
 const MenuHeader = () => {
   const { actions: { toggleMenu } } = useMenuCheckoutStore()
@@ -21,8 +21,8 @@ const MenuHeader = () => {
   )
 }
 
-function Menu() {
-  const { states: { products, total } } = useProductStore()
+export function Menu() {
+  const { states: { products, total } } = useCartStore()
   const { states: { isOpen }, actions: { toggleMenu } } = useMenuCheckoutStore()
   return (
     <div className={`flex flex-col h-full bg-zinc-400 rounded-r-3xl ${isOpen ? 'w-96' : 'w-24'}`}>
@@ -48,9 +48,9 @@ function Menu() {
         <div className="p-5 w-full">
           Meus pedidos
           <div className="flex flex-col justify-between w-full ">
-            {products && products.map((product) => (
-              <div className="flex flex-col py-2">
-                <ItemsCard product={product} />
+            {products && products.map((product, i) => (
+              <div className="flex flex-col py-2" key={product.product_id}>
+                <ItemsCard name={product.name} product_id={product.product_id} price={product.price} key={i} />
               </div>
             ))}
 
@@ -63,12 +63,5 @@ function Menu() {
         </div>
       </div>
     </div>
-  );
-}
-export function MenuCheckoutWithProvider() {
-  return (
-    <MenuCheckoutProvider>
-      <Menu />
-    </MenuCheckoutProvider>
   );
 }

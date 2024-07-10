@@ -1,12 +1,12 @@
 'use client'
 import React from 'react';
 import { useMenuCheckoutStore } from '../Store/Store';
-import { useProductStore } from '../Store/ProductStore';
+import { useCartStore } from '../Store/CartStore';
+
 
 type Product = {
   product_id: string;
   name: string;
-  description: string;
   price: number;
 };
 
@@ -15,7 +15,10 @@ type Props = {
 };
 
 const ProductCard = ({ product }: Props) => {
-  const { actions: { addProduct, calcTotal }, states:{  products, }} = useProductStore()
+  const { actions: { addProduct  }, states:{  products, }} = useCartStore()
+  const {  actions: {  countTotal} } = useCartStore()
+  
+
 
   // Verifica se o produto está definido
   if (!product) {
@@ -23,11 +26,10 @@ const ProductCard = ({ product }: Props) => {
   }
 
   const handleProductClick = (product: Product) => {
-    // Adiciona o produto ao carrinho
-    console.log('Product:', product)
-    addProduct(product)
-    calcTotal()
-    
+    const newProduct = {...product, quantity: 1}
+    addProduct(newProduct)
+    countTotal()
+    console.log("Product added to cart", products)
   }
 
 
