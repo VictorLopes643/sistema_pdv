@@ -8,22 +8,23 @@ export interface ProductDAO {
 
 export class  ProductDAODatabase implements ProductDAO {
 	async getProductByName(name: string) {
-		const connection = pgp()("postgres://postgres:123456@db:5432/app");
+		const connection = pgp()("postgres://postgres:123456@postgresDB:5432/app");
 		const [product] = await connection.query("select * from wolfs_pdv.product where name = $1", [name]);
 		await connection.$pool.end();
 		if (!product) return;
 		return Product.restore(product.product_id, product.name, product.description, product.price);
 	}
 	async newProduct(product: Product): Promise<void> {
-		const connection = pgp()("postgres://postgres:123456@db:5432/app");
+		const connection = pgp()("postgres://postgres:123456@postgresDB:5432/app");
 		await connection.query("INSERT INTO wolfs_pdv.product (product_id, name, description, price) VALUES ($1, $2, $3, $4)", [product.product_id, product.name, product.description, product.price]);
 		await connection.$pool.end();
 
 	}
 
 	async listProduct(): Promise<Product[]> {
-		const connection = pgp()("postgres://postgres:123456@db:5432/app");
+		const connection = pgp()("postgres://postgres:123456@postgresDB:5432/app");
 		const products = await connection.query("select * from wolfs_pdv.product");
+		console.log("test", products)
 		await connection.$pool.end();
 		return products;
 	}

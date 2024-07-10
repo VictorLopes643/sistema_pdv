@@ -3,7 +3,7 @@ import { StoreDAODatabase } from "../src/infra/repository/StoreDAO";
 import NewStore from "../src/application/usecase/NewStore";
 
 
-test("Deve criar uma loja", async function () {   
+test.only("Deve criar uma loja", async function () {   
     const storeDAO = await new StoreDAODatabase()
     const inputStore = {
         name:  faker.company.name(),
