@@ -1,7 +1,7 @@
 {
   "realm": "free",
   "bearer-only": false,
-  "auth-server-url": "http://host.docker.internal:8080/auth",
+  "auth-server-url": "http://host.docker.internal:8080",
   "ssl-required": "external",
   "resource": "nodejs"
 }
