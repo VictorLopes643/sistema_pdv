@@ -6,7 +6,7 @@ import { Menu } from "@/components/menuCheckout/menuCheckout";
 
 
 async function getData() {
-    const res = await fetch('http://localhost:3005/products')
+    const res = await fetch('https://rickandmortyapi.com/api/character')
     if (!res.ok) {
         throw new Error('Failed to fetch data')
     }
