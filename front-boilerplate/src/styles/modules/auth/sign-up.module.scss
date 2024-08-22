@@ -1,0 +1,46 @@
+.formSection {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    width: 100%;
+    padding: 0 10px;
+    align-items: center;
+    justify-content: center;
+
+    .formInformation {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .formElement {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1vh;
+
+    }
+
+    .signInButton {
+        cursor: pointer;
+    }
+}
+
+//===================================================
+//================== Media Query ====================
+//===================================================
+@media (min-width: 481px) {
+    .formSection {
+        width: 75%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .formSection {
+        width: 100%;
+        padding: 2vh 4vw;
+        grid-column: 2;
+    }
+}

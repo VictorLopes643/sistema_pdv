@@ -1,0 +1,21 @@
+.header {
+    flex: 0 0 auto;
+    position: sticky;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    background: var(--primary-element-color);
+    width: 100%;
+    height: var(--crm-header-height);
+    z-index: 1;
+    padding: 0 .5em;
+    grid-area: header;
+
+    svg {
+        cursor: pointer;
+        color: var(--primary-text);
+        font-size: 30px;
+    }
+}

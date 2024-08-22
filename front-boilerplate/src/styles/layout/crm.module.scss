@@ -1,0 +1,20 @@
+.wrapper {
+    min-height: 100svh;
+    display: grid;
+    grid-template-areas: 
+        "aside header header"
+        "aside main main"
+        "aside footer footer";
+    grid-template-rows: var(--crm-header-height) 1fr var(--crm-footer-height);
+    grid-template-columns: 0 1fr;
+
+    .main {
+        grid-area: main;
+    }
+}
+
+@media (min-width: 1200px) {
+    .wrapper {
+        grid-template-columns: 88px 1fr;
+    }
+}

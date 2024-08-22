@@ -42,7 +42,7 @@ services:
       - postgresDB
   nextjs:
     build: 
-      context: ./pdv-front
+      context: ./front-boilerplate
     ports:
       - 3000:3000
     extra_hosts:

@@ -1,0 +1,102 @@
+.formSection {
+    grid-column: 1;
+    grid-row: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    width: 100%;
+    padding: 0 10px;
+    align-items: center;
+    justify-content: center;
+
+    .formInformation {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .loginWithSocialMedia {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 2vw;
+        height: 50px;
+    }
+
+    .formSeparator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3vw;
+        text-transform: uppercase;
+        width: 100%;
+    }
+
+    .formSeparator::before,
+    .formSeparator::after {
+        content: '';
+        width: 50%;
+        height: 1px;
+        background-color: var(--third-text);
+    }
+
+    .formElement {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1vh;
+
+        .passwordOptions {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+
+            label {
+                cursor: pointer;
+
+                input[type="checkbox"] {
+                    cursor: pointer;
+                    margin-right: 10px;
+                }
+            }
+
+        }
+
+    }
+
+    .registration {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        u {
+            cursor: pointer;
+            color: var(--primary-text)
+        }
+    }
+}
+
+
+//===================================================
+//================== Media Query ====================
+//===================================================
+
+@media (min-width: 481px) {
+    .formSection {
+        width: 75%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .formSection {
+        width: 100%;
+        padding: 2vh 4vw;
+        grid-column: 2;
+    }
+}

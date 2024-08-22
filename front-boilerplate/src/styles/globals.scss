@@ -1,0 +1,109 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+:root {
+  /* ===== Colors ===== */
+  --body-color: #F9F9F9;
+  --transparent-body-color: #f9f9f96e;
+  --primary-text: #222c31;
+  --secondary-text: #666666;
+  --third-text: #949494;
+  --primary-element-color: #dce2e6;
+
+  --box-shadow-color-contrast: 0, 0, 0, 0.20;
+
+  /* ===== CRM Layout ===== */
+  --crm-header-height: 2.25em;
+  --crm-footer-height: 4em;
+  --crm-sidebar-closed-width: 88px;
+
+  /* ====== Transition ====== */
+  --tran-03: all 0.2s ease;
+  --tran-03: all 0.3s ease;
+  --tran-04: all 0.4s ease;
+  --tran-05: all 0.5s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label {
+  color: var(--primary-text);
+}
+
+label {
+  font-weight: 600;
+}
+
+p {
+  color: var(--secondary-text);
+}
+
+input {
+  background-color: var(--primary-element-color);
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"] {
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  height: 50px;
+  font-size: 1.1rem;
+  padding-left: 10px;
+}
+
+input:focus,
+input:active {
+  border: none;
+}
+
+.input-message-error {
+  width: 100%;
+  background-color: #d3231ad7;
+  border: 2px solid #b11e16d7;
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+ul.input-message-error {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  list-style: none;
+
+  li {
+    color: white;
+  }
+}
+
+/* ====== Dark Theme ====== */
+html[data-theme="dark"] {
+  --body-color: #111518;
+  --transparent-body-color: #111518a8;
+  --primary-text: #f8f8f8;
+  --secondary-text: #b1b1b1;
+  --third-text: #CCC;
+  --primary-element-color: #242526;
+}
+
+/* ====== Media Queries ====== */
+@media (min-width: 1200px) {
+
+  input[type="email"],
+  input[type="text"],
+  input[type="password"] {
+    padding: 30px 10px;
+  }
+
+}

@@ -1,0 +1,11 @@
+.footer {
+    flex: 0 0 auto;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: var(--crm-footer-height);
+    color: var(--primary-text);
+    background-color: var(--primary-element-color);
+    grid-area: footer;
+}

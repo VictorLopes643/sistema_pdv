@@ -1,0 +1,19 @@
+.btn {
+  //reset button
+  background: none;
+  border: 2px solid transparent;
+  outline: none;
+  box-shadow: none;
+
+  padding: 10px 20px;
+  font-size: .9rem;
+  color: var(--primary-text);
+  background-color: var(--primary-element-color);
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  border-radius: 2px;
+};
+
+.btn:active {
+  border-color: var(--primary-text);
+};

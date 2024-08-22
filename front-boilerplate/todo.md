@@ -1,0 +1,1 @@
+- Diminuir a quantidade de componentes de botão na aplicação

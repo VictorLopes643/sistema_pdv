@@ -1,0 +1,32 @@
+.dialog {
+    border: none;
+    background-color: var(--body-color);
+    border: 1px solid var(--primary-element-color);
+    width: 90%;
+    height: fit-content;
+    align-self: center;
+    justify-self: center;
+    padding: 4vh 20px;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-area: 
+        "header"
+        "body"
+        "footer";
+    gap: 2vh;
+};
+
+@media (min-width: 481px) {
+    .dialog {
+        padding: 2vh 10px;
+        width: 80%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .dialog {
+        width: 60%;
+    }
+}

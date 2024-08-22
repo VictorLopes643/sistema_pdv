@@ -1,0 +1,39 @@
+.loginContainer {
+    background-color: var(--body-color);
+    min-height: 100vh;
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+    grid-row: 1fr;
+    align-items: center;
+    justify-items: center;
+    
+    .imgContainer {
+        display: none;
+    }
+
+};
+
+
+//===================================================
+//================== Media Query ====================
+//===================================================
+@media (min-width: 1200px) {
+    .loginContainer {
+        // gap: 4vw;
+        grid-template-columns: 60% 40%;
+
+        .imgContainer {
+            grid-column: 1;
+            grid-row: 1;
+            display: initial;
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+    }
+}

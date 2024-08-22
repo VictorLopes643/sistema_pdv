@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    justify-content: center;
+
+    h1 {
+        font-size: 1.6rem
+    };
+};
+
+// @media (min-width: 1200px) {
+//     .container {
+//         justify-content: flex-start;
+//     };
+// };
