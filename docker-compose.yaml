@@ -7,13 +7,12 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
     volumes:
-      # - ./project/create.sql:/docker-entrypoint-initdb.d/create.sql
-      - ./project/create.sql:/docker-entrypoint-initdb.d/create.sql
-      - ./postgres_data3:/var/lib/postgresql/data/
+      - ./front-boilerplate/create.sql:/docker-entrypoint-initdb.d/create.sql
     ports:
       - 5432:5432
     command: ["postgres", "-c", "log_statement=all"]
-  keycloakImage:
+
+  keycloak:
     image: quay.io/keycloak/keycloak:legacy
     environment:
       DB_VENDOR: POSTGRES
@@ -23,31 +22,25 @@ services:
       DB_PASSWORD: 123456
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    container_name: Keycloak
     ports:
-      - 8080:8080
+      - 8081:8080
     depends_on:
       - postgresDB
-  app:
-    build: 
-      context: ./project
-    ports:
-      - 3005:3001
-    volumes:
-      - ./project:/home/node/app
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    depends_on:
-      - postgresDB
+      
   nextjs:
     build: 
       context: ./front-boilerplate
     ports:
       - 3000:3000
+    container_name: Front-Boilerplate
+    tty: true
+    volumes:
+      - ./front-boilerplate:/home/node/app
+      - /home/node/app/node_modules
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
       - postgresDB
-
+      - keycloak
 
