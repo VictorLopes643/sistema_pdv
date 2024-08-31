@@ -16,11 +16,9 @@ func NewStoreUseCase(repo store.StoreRepositoryInterface) *newStoreUseCase {
 func (u *newStoreUseCase) Execute(name, address string) error {
 	resStore, err := entity.NewStore(name, address)
 	err = u.repo.SaveStore(resStore)
-
 	if err != nil {
 		return err
 	}
-
 	return nil
 }
 

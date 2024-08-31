@@ -15,10 +15,8 @@ func NewAddTableInStoreUseCase(repo store.StoreRepositoryInterface) *AddTableInS
 
 func (u *AddTableInStoreUseCase) Execute(name string, table entity.TablePoint) error {
 	err := u.repo.AddTableInStore(name, table)
-
 	if err != nil {
 		return err
 	}
-
 	return nil
 }

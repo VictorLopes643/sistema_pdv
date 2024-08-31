@@ -17,10 +17,8 @@ func NewClientUseCase(repo repository.ClientRepositoryInterface) *ClientUseCase 
 func (u *ClientUseCase) Execute(name, phoneNumber string) error {
 	resClient, err := entity.NewClient(name, phoneNumber)
 	err = u.repo.SaveClient(resClient)
-
 	if err != nil {
 		return nil
 	}
-
 	return nil
 }
