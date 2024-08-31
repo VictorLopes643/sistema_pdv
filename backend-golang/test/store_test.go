@@ -1,4 +1,4 @@
-package newStore_test
+package test
 
 import (
 	"fmt"
@@ -38,4 +38,6 @@ func TestAddTableInStore(t *testing.T) {
 	fmt.Println(tablePoint)
 	err = repo.AddTableInStore("Loja", *tablePoint)
 	assert.Nil(t, err)
+
+
 }
