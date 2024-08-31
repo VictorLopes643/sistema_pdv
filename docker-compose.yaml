@@ -1,4 +1,3 @@
-version: '3.9'
 services:
   postgresDB:
     image: postgres:latest
@@ -6,41 +5,55 @@ services:
       POSTGRES_DB: app
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
-    volumes:
-      - ./front-boilerplate/create.sql:/docker-entrypoint-initdb.d/create.sql
+    # volumes:
+    #   - ./front-boilerplate/create.sql:/docker-entrypoint-initdb.d/create.sql
     ports:
       - 5432:5432
     command: ["postgres", "-c", "log_statement=all"]
-
-  keycloak:
-    image: quay.io/keycloak/keycloak:legacy
-    environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgresDB:5432  
-      DB_DATABASE: app
-      DB_USER: postgres
-      DB_PASSWORD: 123456
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
-    container_name: Keycloak
+    
+  golang:
+    build: 
+      context: ./backend-golang
+    container_name: backend-golang
     ports:
       - 8081:8080
-    depends_on:
-      - postgresDB
-      
-  nextjs:
-    build: 
-      context: ./front-boilerplate
-    ports:
-      - 3000:3000
-    container_name: Front-Boilerplate
     tty: true
     volumes:
-      - ./front-boilerplate:/home/node/app
-      - /home/node/app/node_modules
+      - ./backend-golang:/app
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
       - postgresDB
-      - keycloak
+
+  # keycloak:
+  #   image: quay.io/keycloak/keycloak:legacy
+  #   environment:
+  #     DB_VENDOR: POSTGRES
+  #     DB_ADDR: postgresDB:5432  
+  #     DB_DATABASE: app
+  #     DB_USER: postgres
+  #     DB_PASSWORD: 123456
+  #     KEYCLOAK_USER: admin
+  #     KEYCLOAK_PASSWORD: admin
+  #   container_name: Keycloak
+  #   ports:
+  #     - 8081:8080
+  #   depends_on:
+  #     - postgresDB
+      
+  # nextjs:
+  #   build: 
+  #     context: ./front-boilerplate
+  #   ports:
+  #     - 3000:3000
+  #   container_name: Front-Boilerplate
+  #   tty: true
+  #   volumes:
+  #     - ./front-boilerplate:/home/node/app
+  #     - /home/node/app/node_modules
+  #   extra_hosts:
+  #     - "host.docker.internal:host-gateway"
+  #   depends_on:
+  #     - postgresDB
+  #     - keycloak
 
